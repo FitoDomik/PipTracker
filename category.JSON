@@ -1,0 +1,215 @@
+{
+    "categories": [
+      {
+        "name": "Графический интерфейс",
+        "libraries": [
+          {"name":"tkinter","install_name":"","activity":3,"simplicity":4,"size":"light","support":"built-in"},
+          {"name":"PyQt6","install_name":"PyQt6","activity":5,"simplicity":3,"size":"medium","support":"powerful"},
+          {"name":"Kivy","install_name":"kivy","activity":3,"simplicity":2,"size":"medium","support":"active"},
+          {"name":"wxPython","install_name":"wxPython","activity":3,"simplicity":3,"size":"medium","support":"stable"},
+          {"name":"Dear PyGui","install_name":"dearpygui","activity":4,"simplicity":3,"size":"light","support":"gpu"},
+          {"name":"CustomTkinter","install_name":"customtkinter","activity":4,"simplicity":4,"size":"light","support":"modern"},
+          {"name":"PyGObject","install_name":"PyGObject","activity":3,"simplicity":2,"size":"medium","support":"cross-platform"},
+          {"name":"PySimpleGUI","install_name":"PySimpleGUI","activity":4,"simplicity":5,"size":"light","support":"простой"},
+          {"name":"Toga","install_name":"toga","activity":3,"simplicity":3,"size":"medium","support":"кроссплатформенный"},
+          {"name":"PySide6","install_name":"PySide6","activity":4,"simplicity":3,"size":"medium","support":"Qt-альтернатива"}
+        ]
+      },
+      {
+        "name": "Система",
+        "libraries": [
+          {"name":"os","install_name":"","activity":5,"simplicity":5,"size":"built-in","support":"standard"},
+          {"name":"sys","install_name":"","activity":5,"simplicity":4,"size":"built-in","support":"standard"},
+          {"name":"io","install_name":"","activity":4,"simplicity":4,"size":"built-in","support":"powerful"},
+          {"name":"time_module","install_name":"","activity":4,"simplicity":4,"size":"built-in","support":"standard"},
+          {"name":"threading","install_name":"","activity":4,"simplicity":3,"size":"built-in","support":"standard"},
+          {"name":"psutil","install_name":"psutil","activity":4,"simplicity":4,"size":"medium","support":"cross-platform"},
+          {"name":"pywin32","install_name":"pywin32","activity":4,"simplicity":2,"size":"large","support":"windows"},
+          {"name":"asyncio","install_name":"","activity":5,"simplicity":3,"size":"built-in","support":"асинхронный"},
+          {"name":"subprocess","install_name":"","activity":4,"simplicity":3,"size":"built-in","support":"процессы"},
+          {"name":"platform","install_name":"","activity":3,"simplicity":4,"size":"built-in","support":"определение ОС"}
+        ]
+      },
+      {
+        "name": "Данные и визуализация",
+        "libraries": [
+          {"name":"numpy","install_name":"numpy","activity":5,"simplicity":3,"size":"large","support":"powerful"},
+          {"name":"matplotlib","install_name":"matplotlib","activity":5,"simplicity":3,"size":"medium","support":"powerful"},
+          {"name":"pandas","install_name":"pandas","activity":5,"simplicity":3,"size":"large","support":"powerful"},
+          {"name":"seaborn","install_name":"seaborn","activity":4,"simplicity":3,"size":"medium","support":"good"},
+          {"name":"plotly","install_name":"plotly","activity":4,"simplicity":3,"size":"large","support":"interactive"},
+          {"name":"Bokeh","install_name":"bokeh","activity":4,"simplicity":3,"size":"large","support":"interactive"},
+          {"name":"Altair","install_name":"altair","activity":3,"simplicity":4,"size":"medium","support":"declarative"},
+          {"name":"Dash","install_name":"dash","activity":4,"simplicity":3,"size":"large","support":"веб-дашборды"},
+          {"name":"Datashader","install_name":"datashader","activity":3,"simplicity":2,"size":"large","support":"большие данные"},
+          {"name":"PyVista","install_name":"pyvista","activity":3,"simplicity":3,"size":"large","support":"3D-визуализация"}
+        ]
+      },
+      {
+        "name": "Веб-разработка",
+        "libraries": [
+          {"name":"Flask","install_name":"flask","activity":5,"simplicity":4,"size":"medium","support":"popular"},
+          {"name":"Django","install_name":"django","activity":5,"simplicity":3,"size":"large","support":"powerful"},
+          {"name":"FastAPI","install_name":"fastapi","activity":5,"simplicity":4,"size":"medium","support":"modern"},
+          {"name":"Pyramid","install_name":"pyramid","activity":3,"simplicity":3,"size":"medium","support":"stable"},
+          {"name":"Tornado","install_name":"tornado","activity":4,"simplicity":3,"size":"medium","support":"async"},
+          {"name":"Sanic","install_name":"sanic","activity":4,"simplicity":4,"size":"medium","support":"async"},
+          {"name":"Bottle","install_name":"bottle","activity":3,"simplicity":5,"size":"small","support":"micro"},
+          {"name":"Streamlit","install_name":"streamlit","activity":5,"simplicity":5,"size":"medium","support":"дашборды"},
+          {"name":"Starlette","install_name":"starlette","activity":4,"simplicity":3,"size":"small","support":"быстрый"},
+          {"name":"Quart","install_name":"quart","activity":3,"simplicity":4,"size":"small","support":"асинхронный Flask"}
+        ]
+      },
+      {
+        "name": "Сеть",
+        "libraries": [
+          {"name":"requests","install_name":"requests","activity":5,"simplicity":5,"size":"medium","support":"stable"},
+          {"name":"urllib3","install_name":"urllib3","activity":4,"simplicity":3,"size":"medium","support":"low-level"},
+          {"name":"http.client","install_name":"","activity":3,"simplicity":2,"size":"built-in","support":"basic"},
+          {"name":"socket","install_name":"","activity":4,"simplicity":2,"size":"built-in","support":"low-level"},
+          {"name":"aiohttp","install_name":"aiohttp","activity":4,"simplicity":3,"size":"medium","support":"async"},
+          {"name":"httpx","install_name":"httpx","activity":4,"simplicity":5,"size":"medium","support":"modern"},
+          {"name":"pycurl","install_name":"pycurl","activity":3,"simplicity":2,"size":"medium","support":"low-level"},
+          {"name":"Scrapy","install_name":"scrapy","activity":4,"simplicity":3,"size":"large","support":"парсинг"},
+          {"name":"websockets","install_name":"websockets","activity":4,"simplicity":3,"size":"medium","support":"веб-сокеты"},
+          {"name":"paramiko","install_name":"paramiko","activity":4,"simplicity":3,"size":"medium","support":"SSH-клиент"}
+        ]
+      },
+      {
+        "name": "Форматы файлов",
+        "libraries": [
+          {"name":"json","install_name":"","activity":5,"simplicity":5,"size":"built-in","support":"standard"},
+          {"name":"base64","install_name":"","activity":4,"simplicity":4,"size":"built-in","support":"standard"},
+          {"name":"csv","install_name":"","activity":4,"simplicity":4,"size":"built-in","support":"standard"},
+          {"name":"pickle","install_name":"","activity":4,"simplicity":3,"size":"built-in","support":"fast"},
+          {"name":"shutil","install_name":"","activity":4,"simplicity":4,"size":"built-in","support":"standard"},
+          {"name":"openpyxl","install_name":"openpyxl","activity":4,"simplicity":3,"size":"medium","support":"excel"},
+          {"name":"pyyaml","install_name":"pyyaml","activity":4,"simplicity":4,"size":"medium","support":"yaml"},
+          {"name":"docx","install_name":"python-docx","activity":3,"simplicity":3,"size":"medium","support":"Word-документы"},
+          {"name":"PyPDF2","install_name":"PyPDF2","activity":4,"simplicity":3,"size":"medium","support":"PDF-файлы"},
+          {"name":"xlsxwriter","install_name":"xlsxwriter","activity":4,"simplicity":4,"size":"medium","support":"Excel-таблицы"}
+        ]
+      },
+      {
+        "name": "Время и планирование",
+        "libraries": [
+          {"name":"datetime","install_name":"","activity":5,"simplicity":4,"size":"built-in","support":"standard"},
+          {"name":"time_module","install_name":"","activity":4,"simplicity":4,"size":"built-in","support":"standard"},
+          {"name":"calendar","install_name":"","activity":3,"simplicity":3,"size":"built-in","support":"basic"},
+          {"name":"schedule","install_name":"schedule","activity":3,"simplicity":3,"size":"medium","support":"convenient"},
+          {"name":"timedelta","install_name":"","activity":5,"simplicity":5,"size":"built-in","support":"standard"},
+          {"name":"APScheduler","install_name":"apscheduler","activity":4,"simplicity":3,"size":"medium","support":"advanced"},
+          {"name":"Celery","install_name":"celery","activity":5,"simplicity":2,"size":"large","support":"distributed"},
+          {"name":"Arrow","install_name":"arrow","activity":4,"simplicity":4,"size":"small","support":"удобная дата/время"},
+          {"name":"Pendulum","install_name":"pendulum","activity":3,"simplicity":4,"size":"medium","support":"продвинутое время"},
+          {"name":"dateutil","install_name":"python-dateutil","activity":4,"simplicity":3,"size":"small","support":"парсинг дат"}
+        ]
+      },
+      {
+        "name": "Текст и парсинг",
+        "libraries": [
+          {"name":"re","install_name":"","activity":5,"simplicity":3,"size":"built-in","support":"standard"},
+          {"name":"html.parser","install_name":"","activity":3,"simplicity":3,"size":"built-in","support":"basic"},
+          {"name":"BeautifulSoup","install_name":"beautifulsoup4","activity":4,"simplicity":4,"size":"large","support":"convenient"},
+          {"name":"lxml","install_name":"lxml","activity":4,"simplicity":3,"size":"medium","support":"powerful"},
+          {"name":"markdown","install_name":"markdown","activity":3,"simplicity":4,"size":"medium","support":"specialized"},
+          {"name":"nltk","install_name":"nltk","activity":4,"simplicity":3,"size":"large","support":"nlp"},
+          {"name":"spaCy","install_name":"spacy","activity":5,"simplicity":3,"size":"large","support":"nlp"},
+          {"name":"pymorphy2","install_name":"pymorphy2","activity":3,"simplicity":3,"size":"medium","support":"морфология"},
+          {"name":"TextBlob","install_name":"textblob","activity":3,"simplicity":4,"size":"medium","support":"анализ текста"},
+          {"name":"Gensim","install_name":"gensim","activity":4,"simplicity":3,"size":"large","support":"тематическое моделирование"}
+        ]
+      },
+      {
+        "name": "Оборудование",
+        "libraries": [
+          {"name":"serial","install_name":"pyserial","activity":4,"simplicity":3,"size":"module","support":"active"},
+          {"name":"cv2","install_name":"opencv-python","activity":5,"simplicity":3,"size":"large","support":"multi"},
+          {"name":"RPi.GPIO","install_name":"RPi.GPIO","activity":3,"simplicity":3,"size":"module","support":"specialized"},
+          {"name":"pyusb","install_name":"pyusb","activity":3,"simplicity":2,"size":"module","support":"usb"},
+          {"name":"pybluez","install_name":"pybluez","activity":3,"simplicity":2,"size":"module","support":"bluetooth"},
+          {"name":"gpiozero","install_name":"gpiozero","activity":3,"simplicity":4,"size":"module","support":"raspberry-pi"},
+          {"name":"picamera","install_name":"picamera","activity":3,"simplicity":4,"size":"module","support":"camera"},
+          {"name":"PyAudio","install_name":"PyAudio","activity":3,"simplicity":3,"size":"medium","support":"аудио"},
+          {"name":"python-periphery","install_name":"python-periphery","activity":3,"simplicity":3,"size":"module","support":"интерфейсы"},
+          {"name":"adafruit-circuitpython","install_name":"adafruit-circuitpython","activity":3,"simplicity":3,"size":"large","support":"микроконтроллеры"}
+        ]
+      },
+      {
+        "name": "Базы данных",
+        "libraries": [
+          {"name":"sqlite3","install_name":"","activity":5,"simplicity":4,"size":"built-in","support":"lightweight"},
+          {"name":"SQLAlchemy","install_name":"sqlalchemy","activity":5,"simplicity":3,"size":"large","support":"orm"},
+          {"name":"pymongo","install_name":"pymongo","activity":4,"simplicity":3,"size":"medium","support":"nosql"},
+          {"name":"redis-py","install_name":"redis","activity":4,"simplicity":3,"size":"medium","support":"cache"},
+          {"name":"psycopg2","install_name":"psycopg2","activity":4,"simplicity":3,"size":"medium","support":"postgresql"},
+          {"name":"mysql-connector","install_name":"mysql-connector-python","activity":4,"simplicity":3,"size":"medium","support":"mysql"},
+          {"name":"peewee","install_name":"peewee","activity":3,"simplicity":4,"size":"small","support":"orm"},
+          {"name":"PyMongo","install_name":"pymongo","activity":4,"simplicity":3,"size":"medium","support":"MongoDB"},
+          {"name":"SQLite-Utils","install_name":"sqlite-utils","activity":3,"simplicity":4,"size":"small","support":"утилиты SQLite"},
+          {"name":"Tortoise-ORM","install_name":"tortoise-orm","activity":3,"simplicity":3,"size":"medium","support":"асинхронный ORM"}
+        ]
+      },
+      {
+        "name": "Машинное обучение",
+        "libraries": [
+          {"name":"scikit-learn","install_name":"scikit-learn","activity":5,"simplicity":3,"size":"large","support":"ml"},
+          {"name":"TensorFlow","install_name":"tensorflow","activity":5,"simplicity":2,"size":"very-large","support":"deep-learning"},
+          {"name":"PyTorch","install_name":"torch","activity":5,"simplicity":2,"size":"very-large","support":"deep-learning"},
+          {"name":"Keras","install_name":"keras","activity":4,"simplicity":3,"size":"large","support":"high-level"},
+          {"name":"xgboost","install_name":"xgboost","activity":4,"simplicity":3,"size":"medium","support":"gradient-boosting"},
+          {"name":"LightGBM","install_name":"lightgbm","activity":4,"simplicity":3,"size":"medium","support":"gradient-boosting"},
+          {"name":"CatBoost","install_name":"catboost","activity":3,"simplicity":3,"size":"medium","support":"gradient-boosting"},
+          {"name":"Hugging Face","install_name":"transformers","activity":5,"simplicity":3,"size":"very-large","support":"трансформеры"},
+          {"name":"PyCaret","install_name":"pycaret","activity":4,"simplicity":4,"size":"large","support":"автоМЛ"},
+          {"name":"StatsModels","install_name":"statsmodels","activity":4,"simplicity":3,"size":"large","support":"статистика"}
+        ]
+      },
+      {
+        "name": "Разработка игр",
+        "libraries": [
+          {"name":"Pygame","install_name":"pygame","activity":4,"simplicity":4,"size":"medium","support":"2d"},
+          {"name":"Arcade","install_name":"arcade","activity":3,"simplicity":4,"size":"medium","support":"2d"},
+          {"name":"Panda3D","install_name":"panda3d","activity":3,"simplicity":2,"size":"large","support":"3d"},
+          {"name":"PyOgre","install_name":"pyogre","activity":2,"simplicity":1,"size":"large","support":"3d"},
+          {"name":"Pyglet","install_name":"pyglet","activity":3,"simplicity":3,"size":"medium","support":"opengl"},
+          {"name":"PyOpenGL","install_name":"PyOpenGL","activity":3,"simplicity":2,"size":"medium","support":"opengl"},
+          {"name":"Ursina","install_name":"ursina","activity":3,"simplicity":4,"size":"medium","support":"3d"},
+          {"name":"Pyxel","install_name":"pyxel","activity":3,"simplicity":4,"size":"small","support":"ретро-игры"},
+          {"name":"PySDL2","install_name":"PySDL2","activity":3,"simplicity":2,"size":"medium","support":"SDL-биндинги"},
+          {"name":"Cocos2d","install_name":"cocos2d","activity":2,"simplicity":3,"size":"medium","support":"2D-движок"}
+        ]
+      },
+      {
+        "name": "Безопасность",
+        "libraries": [
+          {"name":"cryptography","install_name":"cryptography","activity":5,"simplicity":3,"size":"medium","support":"шифрование"},
+          {"name":"pycryptodome","install_name":"pycryptodome","activity":4,"simplicity":3,"size":"medium","support":"криптография"},
+          {"name":"hashlib","install_name":"","activity":5,"simplicity":4,"size":"built-in","support":"хеширование"},
+          {"name":"secrets","install_name":"","activity":4,"simplicity":4,"size":"built-in","support":"генерация токенов"},
+          {"name":"bcrypt","install_name":"bcrypt","activity":4,"simplicity":3,"size":"small","support":"пароли"},
+          {"name":"PyJWT","install_name":"PyJWT","activity":4,"simplicity":3,"size":"small","support":"JWT-токены"},
+          {"name":"python-owasp-zap","install_name":"python-owasp-zap-v2.4","activity":3,"simplicity":2,"size":"large","support":"тестирование"},
+          {"name":"pwntools","install_name":"pwntools","activity":3,"simplicity":2,"size":"large","support":"эксплойты"},
+          {"name":"scapy","install_name":"scapy","activity":4,"simplicity":2,"size":"medium","support":"сетевые пакеты"},
+          {"name":"pyOpenSSL","install_name":"pyOpenSSL","activity":3,"simplicity":2,"size":"medium","support":"SSL/TLS"}
+        ]
+      },
+      {
+        "name": "Инструменты разработки",
+        "libraries": [
+          {"name":"pytest","install_name":"pytest","activity":5,"simplicity":4,"size":"medium","support":"тестирование"},
+          {"name":"black","install_name":"black","activity":5,"simplicity":5,"size":"medium","support":"форматирование"},
+          {"name":"flake8","install_name":"flake8","activity":4,"simplicity":4,"size":"small","support":"линтер"},
+          {"name":"mypy","install_name":"mypy","activity":4,"simplicity":3,"size":"medium","support":"типизация"},
+          {"name":"poetry","install_name":"poetry","activity":4,"simplicity":3,"size":"medium","support":"зависимости"},
+          {"name":"Sphinx","install_name":"sphinx","activity":4,"simplicity":3,"size":"medium","support":"документация"},
+          {"name":"pylint","install_name":"pylint","activity":4,"simplicity":3,"size":"medium","support":"статический анализ"},
+          {"name":"coverage","install_name":"coverage","activity":4,"simplicity":3,"size":"small","support":"покрытие кода"},
+          {"name":"pre-commit","install_name":"pre-commit","activity":4,"simplicity":3,"size":"small","support":"git-хуки"},
+          {"name":"bump2version","install_name":"bump2version","activity":3,"simplicity":4,"size":"small","support":"версионирование"}
+        ]
+      }
+    ]
+  }
+  
