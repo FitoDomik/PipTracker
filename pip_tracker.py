@@ -373,6 +373,7 @@ class InstalledPackagesView(QWidget):
         self.refresh_packages()
     def refresh_packages(self):
         try:
+            self.search_input.clear()
             self.packages = list(pkg_resources.working_set)
             self.outdated_finder = OutdatedPackagesFinder()
             self.outdated_finder.finished.connect(self.update_outdated_info)
@@ -585,6 +586,8 @@ class MainWindow(QMainWindow):
         updater.finished.connect(self.installed_packages.refresh_packages)
         updater.start()
         dialog.exec()
+        # Дополнительное обновление после закрытия диалога
+        self.installed_packages.refresh_packages()
     def package_updated_in_bulk(self, package_name, success, message, previous_version):
         self.history_manager.add_operation(
             "update",
@@ -642,8 +645,7 @@ class MainWindow(QMainWindow):
             success,
             message
         )
-        if success:
-            self.installed_packages.refresh_packages()
+        self.installed_packages.refresh_packages()
     def update_package(self, package_name):
         dialog = StatusDialog(self)
         dialog.setWindowTitle(f"Обновление {package_name}")
@@ -671,8 +673,7 @@ class MainWindow(QMainWindow):
             success,
             message
         )
-        if success:
-            self.installed_packages.refresh_packages()
+        self.installed_packages.refresh_packages()
     def uninstall_package(self, package_name):
         current_version = None
         try:
@@ -707,8 +708,7 @@ class MainWindow(QMainWindow):
             success,
             message
         )
-        if success:
-            self.installed_packages.refresh_packages()
+        self.installed_packages.refresh_packages()
     def update_selected_packages(self, package_names):
         if not package_names:
             return
@@ -733,6 +733,7 @@ class MainWindow(QMainWindow):
         updater.finished.connect(self.installed_packages.refresh_packages)
         updater.start()
         dialog.exec()
+        self.installed_packages.refresh_packages()
     def uninstall_selected_packages(self, package_names):
         if not package_names:
             return
@@ -754,6 +755,7 @@ class MainWindow(QMainWindow):
             uninstaller.finished.connect(self.installed_packages.refresh_packages)
             uninstaller.start()
             dialog.exec()
+            self.installed_packages.refresh_packages()
     def package_updated_in_bulk(self, package_name, success, message, previous_version):
         self.history_manager.add_operation(
             "update",
@@ -792,8 +794,7 @@ class MainWindow(QMainWindow):
     def rollback_finished(self, success, message, dialog):
         dialog.add_message(message)
         dialog.operation_finished()
-        if success:
-            self.installed_packages.refresh_packages()
+        self.installed_packages.refresh_packages()
 class PackageHistoryManager:
     def __init__(self, history_file="package_history.json"):
         self.history_file = history_file
