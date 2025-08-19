@@ -318,6 +318,8 @@ class InstalledPackagesView(QWidget):
     update_requested = pyqtSignal(str)
     uninstall_requested = pyqtSignal(str)
     show_details_requested = pyqtSignal(str)
+    update_selected_requested = pyqtSignal(list)
+    uninstall_selected_requested = pyqtSignal(list)
     def __init__(self, parent=None):
         super().__init__(parent)
         self.layout = QVBoxLayout(self)
@@ -335,7 +337,7 @@ class InstalledPackagesView(QWidget):
         self.table.setHorizontalHeaderLabels(["Название", "Версия", "Обновление", "Статус"])
         self.table.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
         self.table.setSelectionBehavior(QTableWidget.SelectionBehavior.SelectRows)
-        self.table.setSelectionMode(QTableWidget.SelectionMode.SingleSelection)
+        self.table.setSelectionMode(QTableWidget.SelectionMode.MultiSelection)
         self.table.itemDoubleClicked.connect(self.on_item_double_clicked)
         self.table.verticalHeader().setDefaultSectionSize(22)  
         self.layout.addWidget(self.table)
@@ -347,14 +349,22 @@ class InstalledPackagesView(QWidget):
         self.update_button = QPushButton("Обновить")
         self.update_button.clicked.connect(self.request_update)
         self.update_button.setEnabled(False)
+        self.update_selected_button = QPushButton("Обновить выбранные")
+        self.update_selected_button.clicked.connect(self.request_update_selected)
+        self.update_selected_button.setEnabled(False)
         self.uninstall_button = QPushButton("Удалить")
         self.uninstall_button.clicked.connect(self.request_uninstall)
         self.uninstall_button.setEnabled(False)
+        self.uninstall_selected_button = QPushButton("Удалить выбранные")
+        self.uninstall_selected_button.clicked.connect(self.request_uninstall_selected)
+        self.uninstall_selected_button.setEnabled(False)
         self.refresh_button = QPushButton("Обновить список")
         self.refresh_button.clicked.connect(self.refresh_packages)
         button_layout.addWidget(self.info_button)
         button_layout.addWidget(self.update_button)
+        button_layout.addWidget(self.update_selected_button)
         button_layout.addWidget(self.uninstall_button)
+        button_layout.addWidget(self.uninstall_selected_button)
         button_layout.addWidget(self.refresh_button)
         self.layout.addLayout(button_layout)
         self.packages = []
@@ -420,14 +430,26 @@ class InstalledPackagesView(QWidget):
     def enable_buttons(self):
         selected_items = self.table.selectedItems()
         has_selection = len(selected_items) > 0
+        selected_rows = self.table.selectionModel().selectedRows()
+        has_multiple_selection = len(selected_rows) > 1
         self.uninstall_button.setEnabled(has_selection)
         self.info_button.setEnabled(has_selection)
+        self.uninstall_selected_button.setEnabled(has_multiple_selection)
         if has_selection:
             row = self.table.currentRow()
             update_info = self.table.item(row, 2).text()
             self.update_button.setEnabled(bool(update_info))
+            has_updates = False
+            for row_index in selected_rows:
+                if row_index.row() < self.table.rowCount():
+                    update_info = self.table.item(row_index.row(), 2).text()
+                    if update_info:
+                        has_updates = True
+                        break
+            self.update_selected_button.setEnabled(has_multiple_selection and has_updates)
         else:
             self.update_button.setEnabled(False)
+            self.update_selected_button.setEnabled(False)
     def request_update(self):
         selected_row = self.table.currentRow()
         if selected_row >= 0:
@@ -438,6 +460,28 @@ class InstalledPackagesView(QWidget):
         if selected_row >= 0:
             package_name = self.table.item(selected_row, 0).text()
             self.uninstall_requested.emit(package_name)
+    def request_update_selected(self):
+        selected_rows = self.table.selectionModel().selectedRows()
+        if len(selected_rows) > 1:
+            packages_to_update = []
+            for row_index in selected_rows:
+                if row_index.row() < self.table.rowCount():
+                    package_name = self.table.item(row_index.row(), 0).text()
+                    update_info = self.table.item(row_index.row(), 2).text()
+                    if update_info:
+                        packages_to_update.append(package_name)
+            if packages_to_update:
+                self.update_selected_requested.emit(packages_to_update)
+    def request_uninstall_selected(self):
+        selected_rows = self.table.selectionModel().selectedRows()
+        if len(selected_rows) > 1:
+            packages_to_uninstall = []
+            for row_index in selected_rows:
+                if row_index.row() < self.table.rowCount():
+                    package_name = self.table.item(row_index.row(), 0).text()
+                    packages_to_uninstall.append(package_name)
+            if packages_to_uninstall:
+                self.uninstall_selected_requested.emit(packages_to_uninstall)
     def request_show_details(self):
         selected_row = self.table.currentRow()
         if selected_row >= 0:
@@ -488,6 +532,8 @@ class MainWindow(QMainWindow):
         self.installed_packages.update_requested.connect(self.update_package)
         self.installed_packages.uninstall_requested.connect(self.uninstall_package)
         self.installed_packages.show_details_requested.connect(self.show_package_details)
+        self.installed_packages.update_selected_requested.connect(self.update_selected_packages)
+        self.installed_packages.uninstall_selected_requested.connect(self.uninstall_selected_packages)
         installed_group = QGroupBox("Установленные пакеты")
         installed_layout = QVBoxLayout(installed_group)
         installed_layout.setContentsMargins(2, 2, 2, 2)  
@@ -663,6 +709,67 @@ class MainWindow(QMainWindow):
         )
         if success:
             self.installed_packages.refresh_packages()
+    def update_selected_packages(self, package_names):
+        if not package_names:
+            return
+        dialog = StatusDialog(self)
+        dialog.setWindowTitle(f"Обновление {len(package_names)} пакетов")
+        packages_with_versions = []
+        for package_name in package_names:
+            current_version = None
+            try:
+                for pkg in pkg_resources.working_set:
+                    if pkg.key == package_name.lower():
+                        current_version = pkg.version
+                        break
+            except:
+                pass
+            packages_with_versions.append({"name": package_name, "version": current_version})
+        updater = BulkPackageUpdater(packages_with_versions)
+        updater.progress.connect(dialog.add_message)
+        updater.package_updated.connect(lambda name, success, message, prev_version: 
+                                      self.package_updated_in_bulk(name, success, message, prev_version))
+        updater.finished.connect(dialog.operation_finished)
+        updater.finished.connect(self.installed_packages.refresh_packages)
+        updater.start()
+        dialog.exec()
+    def uninstall_selected_packages(self, package_names):
+        if not package_names:
+            return
+        packages_text = "\n".join([f"• {name}" for name in package_names])
+        reply = QMessageBox.question(
+            self, 
+            "Подтверждение удаления", 
+            f"Вы уверены, что хотите удалить следующие пакеты?\n\n{packages_text}",
+            QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No
+        )
+        if reply == QMessageBox.StandardButton.Yes:
+            dialog = StatusDialog(self)
+            dialog.setWindowTitle(f"Удаление {len(package_names)} пакетов")
+            uninstaller = BulkPackageUninstaller(package_names)
+            uninstaller.progress.connect(dialog.add_message)
+            uninstaller.package_uninstalled.connect(lambda name, success, message, version: 
+                                                  self.package_uninstalled_in_bulk(name, success, message, version))
+            uninstaller.finished.connect(dialog.operation_finished)
+            uninstaller.finished.connect(self.installed_packages.refresh_packages)
+            uninstaller.start()
+            dialog.exec()
+    def package_updated_in_bulk(self, package_name, success, message, previous_version):
+        self.history_manager.add_operation(
+            "update",
+            package_name,
+            previous_version,
+            success,
+            message
+        )
+    def package_uninstalled_in_bulk(self, package_name, success, message, version):
+        self.history_manager.add_operation(
+            "uninstall",
+            package_name,
+            version,
+            success,
+            message
+        )
     def rollback_operation(self, operation):
         dialog = StatusDialog(self)
         dialog.setWindowTitle(f"Откат операции для {operation.get('package')}")
@@ -1202,6 +1309,66 @@ class BulkPackageUpdater(QThread):
                 self.progress.emit(f"Ошибка при обновлении {package_name}: {str(e)}")
                 self.package_updated.emit(package_name, False, str(e), current_version)
         self.progress.emit(f"Обновление завершено.")
+        self.finished.emit()
+class BulkPackageUninstaller(QThread):
+    progress = pyqtSignal(str)
+    package_uninstalled = pyqtSignal(str, bool, str, str)
+    finished = pyqtSignal()
+    def __init__(self, package_names):
+        super().__init__()
+        self.package_names = package_names
+    def run(self):
+        total = len(self.package_names)
+        self.progress.emit(f"Начало удаления {total} пакетов...")
+        for i, package_name in enumerate(self.package_names):
+            if not package_name:
+                continue
+            current_version = None
+            try:
+                for pkg in pkg_resources.working_set:
+                    if pkg.key == package_name.lower():
+                        current_version = pkg.version
+                        break
+            except:
+                pass
+            self.progress.emit(f"[{i+1}/{total}] Удаление {package_name} ({current_version or 'неизвестная версия'})...")
+            try:
+                deps_process = subprocess.Popen(
+                    ["pip", "show", package_name], 
+                    stdout=subprocess.PIPE,
+                    stderr=subprocess.PIPE,
+                    universal_newlines=True
+                )
+                stdout, stderr = deps_process.communicate()
+                if deps_process.returncode == 0:
+                    required_by = None
+                    for line in stdout.split('\n'):
+                        if line.startswith("Required-by:"):
+                            required_by = line[len("Required-by:"):].strip()
+                            break
+                    if required_by and required_by != "":
+                        self.progress.emit(f"Пропуск {package_name}: требуется для {required_by}")
+                        self.package_uninstalled.emit(package_name, False, f"Пакет требуется для: {required_by}", current_version)
+                        continue
+            except:
+                pass
+            cmd = ["pip", "uninstall", "-y", package_name]
+            try:
+                process = subprocess.Popen(
+                    cmd,
+                    stdout=subprocess.PIPE,
+                    stderr=subprocess.PIPE,
+                    universal_newlines=True
+                )
+                stdout, stderr = process.communicate()
+                success = process.returncode == 0
+                message = stdout if success else stderr
+                self.progress.emit(f"{'Успешно' if success else 'Ошибка'}: {message}")
+                self.package_uninstalled.emit(package_name, success, message, current_version)
+            except Exception as e:
+                self.progress.emit(f"Ошибка при удалении {package_name}: {str(e)}")
+                self.package_uninstalled.emit(package_name, False, str(e), current_version)
+        self.progress.emit(f"Удаление завершено.")
         self.finished.emit()
 class PackageSizeAnalyzer(QThread):
     progress = pyqtSignal(str)
